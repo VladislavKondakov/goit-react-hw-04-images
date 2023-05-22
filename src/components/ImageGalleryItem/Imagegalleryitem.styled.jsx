@@ -19,3 +19,11 @@ export const Img = styled.img`
     cursor: zoom-in;
   }
 `;
+
+export const Button = styled.button`
+width:150px;
+height:40px;
+margin-top:30px;
+margin-bottom:30px;
+margin-left:850px;
+`

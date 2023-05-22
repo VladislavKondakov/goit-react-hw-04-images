@@ -5,6 +5,7 @@ import { Ul } from "../ImageGallery/ImageGallery.styled";
 import { Li, Img } from "./Imagegalleryitem.styled";
 import Modal from "components/Modal/Modal";
 import PropTypes from 'prop-types';
+import { Button } from "./Imagegalleryitem.styled";
 
 const ImageGalleryitem = ({ searchText }) => {
   const [news, setNews] = useState([]);
@@ -70,9 +71,9 @@ const ImageGalleryitem = ({ searchText }) => {
       </Ul>
       {isLoading && <Audio type="ThreeDots" color="#00BFFF" height={80} width={80} />}
       {news.length > 0 && (
-        <button type="button" onClick={handleLoadMore}>
+        <Button type="button" onClick={handleLoadMore}>
           Load more
-        </button>
+        </Button>
       )}
       {isModalOpen && (
         <Modal onClose={handleCloseModal} large={selectedImage} />
