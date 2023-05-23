@@ -6,6 +6,7 @@ import { Li, Img } from "./Imagegalleryitem.styled";
 import Modal from "components/Modal/Modal";
 import PropTypes from 'prop-types';
 import { Button } from "./Imagegalleryitem.styled";
+import { DivButton } from "./Imagegalleryitem.styled";
 
 const ImageGalleryitem = ({ searchText }) => {
   const [news, setNews] = useState([]);
@@ -20,6 +21,7 @@ const ImageGalleryitem = ({ searchText }) => {
       const fetchData = async () => {
         try {
           setIsLoading(true);
+          setPage(1); 
           const data = await getSearchNews(searchText, 1);
           setNews(data.hits);
           setError(null);
@@ -41,7 +43,7 @@ const ImageGalleryitem = ({ searchText }) => {
       .then((data) => {
         setNews((prevNews) => [...prevNews, ...data.hits]);
         setError(null);
-        setPage(nextPage);
+        setPage(prevPage => prevPage + 1); 
       })
       .catch((error) => {
         setError(error);
@@ -75,9 +77,11 @@ const ImageGalleryitem = ({ searchText }) => {
       )}
       {isLoading && <Audio type="ThreeDots" color="#00BFFF" height={80} width={80} />}
       {news.length > 0 && (
+        <DivButton>
         <Button type="button" onClick={handleLoadMore}>
           Load more
-        </Button>
+          </Button>
+          </DivButton>
       )}
       {isModalOpen && (
         <Modal onClose={handleCloseModal} large={selectedImage} />

@@ -25,5 +25,11 @@ width:150px;
 height:40px;
 margin-top:30px;
 margin-bottom:30px;
-margin-left:850px;
+
+`
+
+export const DivButton = styled.div`
+display: flex;
+  justify-content: center;
+  align-items: center;
 `
