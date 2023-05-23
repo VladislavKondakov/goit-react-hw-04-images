@@ -16,20 +16,22 @@ const ImageGalleryitem = ({ searchText }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getSearchNews(searchText, 1);
-        setNews(data.hits);
-        setError(null);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    if (searchText) {
+      const fetchData = async () => {
+        try {
+          setIsLoading(true);
+          const data = await getSearchNews(searchText, 1);
+          setNews(data.hits);
+          setError(null);
+        } catch (error) {
+          setError(error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
-    fetchData();
+      fetchData();
+    }
   }, [searchText]);
 
   const handleLoadMore = () => {
@@ -62,13 +64,15 @@ const ImageGalleryitem = ({ searchText }) => {
   return (
     <>
       {error && <p>{error.message}</p>}
-      <Ul>
-        {news.map((item) => (
-          <Li key={item.id} onClick={() => handleOpenModal(item.largeImageURL)}>
-            <Img src={item.webformatURL} alt={item.tags} />
-          </Li>
-        ))}
-      </Ul>
+      {searchText && (
+        <Ul>
+          {news.map((item) => (
+            <Li key={item.id} onClick={() => handleOpenModal(item.largeImageURL)}>
+              <Img src={item.webformatURL} alt={item.tags} />
+            </Li>
+          ))}
+        </Ul>
+      )}
       {isLoading && <Audio type="ThreeDots" color="#00BFFF" height={80} width={80} />}
       {news.length > 0 && (
         <Button type="button" onClick={handleLoadMore}>
