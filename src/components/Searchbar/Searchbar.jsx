@@ -3,6 +3,7 @@ import { Header } from "./Searchbar.styled";
 
 const Searchbar = ({ handleSearch }) => {
   const [value, setValue] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -11,10 +12,11 @@ const Searchbar = ({ handleSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSearch(value);
+     setIsModalOpen(true);
   };
 
   return (
-    <Header className="searchbar">
+    <Header className={`searchbar ${isModalOpen ? 'modal-open' : ''}`}>
       <form className="form" onSubmit={handleSubmit}>
         <button type="submit" className="button">
           <span className="button-label">Search</span>
